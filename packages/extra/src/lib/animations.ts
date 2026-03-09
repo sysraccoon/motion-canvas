@@ -8,7 +8,6 @@ import {
   useDuration,
   waitFor,
 } from '@motion-canvas/core';
-import {MarkType, addMark} from './custom-meta';
 import {applyState, deepSaveState} from './node-utils';
 
 const DEFAULT_DURATION = 0.4;
@@ -97,9 +96,7 @@ export function* nop(durationOrEventName: number | string = DEFAULT_DURATION) {
       ? durationOrEventName
       : useDuration(durationOrEventName);
 
-  addMark(MarkType.NopStart);
   yield* waitFor(duration);
-  addMark(MarkType.NopEnd);
 }
 
 // FIXME column-reverse and row-reverse directions are broken
