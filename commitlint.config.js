@@ -17,6 +17,7 @@ module.exports = {
         'player',
         'ui',
         'vite-plugin',
+        'extra',
       ],
     ],
   },

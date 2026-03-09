@@ -1,0 +1,27 @@
+{
+  "extends": "../tsconfig.base.json",
+  "compilerOptions": {
+    "types": ["node", "vite/client"],
+    "jsx": "react-jsx",
+    "jsxImportSource": "@motion-canvas/2d/src/lib",
+    "plugins": [
+      {
+        "transform": "@motion-canvas/internal/transformers/markdown-literals.js"
+      }
+    ],
+    "strict": true,
+    "noImplicitOverride": true,
+    "module": "esnext",
+    "target": "es2020",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "declaration": true,
+    "declarationMap": true,
+    "inlineSourceMap": true,
+    "experimentalDecorators": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true
+  },
+  "include": ["**/*"]
+}

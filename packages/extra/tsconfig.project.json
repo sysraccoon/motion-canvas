@@ -1,0 +1,20 @@
+{
+  "extends": "@motion-canvas/core/tsconfig.project.json",
+  "compilerOptions": {
+    "jsx": "react-jsx",
+    "jsxImportSource": "@motion-canvas/2d/lib",
+    "baseUrl": "src",
+    "outDir": "./lib",
+    "strict": true,
+    "declaration": true,
+    "sourceMap": true,
+    "noImplicitAny": true,
+    "module": "esnext",
+    "target": "es2022",
+    "allowJs": true,
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "experimentalDecorators": true
+  }
+}

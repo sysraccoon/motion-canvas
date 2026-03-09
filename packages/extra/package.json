@@ -1,0 +1,54 @@
+{
+  "name": "@motion-canvas/extra",
+  "version": "3.17.2",
+  "description": "sys.raccooon custom tools",
+  "author": "motion-canvas",
+  "homepage": "https://motioncanvas.io/",
+  "bugs": "https://github.com/motion-canvas/motion-canvas/issues",
+  "license": "MIT",
+  "main": "lib/index.js",
+  "types": "./lib/index.d.ts",
+  "scripts": {
+    "dev": "tspc -p src/lib -w",
+    "build": "tspc -p src/lib/tsconfig.build.json",
+    "bundle": "rollup -c rollup.config.mjs",
+    "test": "vitest"
+  },
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/motion-canvas/motion-canvas.git"
+  },
+  "files": [
+    "lib",
+    "src",
+    "tsconfig.project.json"
+  ],
+  "devDependencies": {
+    "@motion-canvas/internal": "0.0.0",
+    "@motion-canvas/ui": "^3.17.2",
+    "@preact/signals": "^1.2.1",
+    "@types/parse-svg-path": "^0.1.0",
+    "@types/node": "^22.9.0",
+    "@types/qrcode": "^1.5.5",
+    "clsx": "^2.0.0",
+    "jsdom": "^22.1.0",
+    "preact": "^10.19.2",
+    "vitest": "^0.34.6"
+  },
+  "dependencies": {
+    "@codemirror/language": "^6.10.1",
+    "@lezer/common": "^1.2.1",
+    "@lezer/highlight": "^1.2.0",
+    "@motion-canvas/2d": "^3.17.2",
+    "@motion-canvas/core": "^3.17.2",
+    "code-fns": "^0.8.2",
+    "escape-string-regexp": "^5.0.0",
+    "mathjax-full": "^3.2.2",
+    "parse-svg-path": "^0.1.2",
+    "@fig/lezer-bash": "^1.2.5",
+    "@hhenrichsen/canvas-commons": "^0.10.2",
+    "@lezer/javascript": "^1.4.19",
+    "qrcode": "^1.5.4"
+  }
+}

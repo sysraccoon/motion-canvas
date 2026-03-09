@@ -1,0 +1,65 @@
+import {Code, Gradient, Rect, Txt, withDefaults} from '@motion-canvas/2d';
+import {colors} from './colorscheme';
+import {CodeRegionAccent} from './components';
+import {defaultFont} from './consts';
+
+export const FillerRect = withDefaults(Rect, {
+  fontSize: 34,
+  fontFamily: defaultFont,
+  padding: 30,
+  radius: 15,
+  fill: colors.backgroundAlt,
+  clip: true,
+  layout: true,
+});
+
+export const SpikeCornerRect = withDefaults(FillerRect, {
+  radius: [0, 15, 15, 15],
+});
+
+export const CodeSnippet = withDefaults(Code, {
+  fontFamily: defaultFont,
+  fill: colors.foreground,
+  fontSize: 34,
+});
+
+export const CodePrimaryRegionAccent = withDefaults(CodeRegionAccent, {
+  lineWidth: 8,
+  radius: 4,
+  accentRegionGrow: [20, 15],
+  stroke: new Gradient({
+    fromX: 0,
+    toX: 100,
+    angle: 45,
+    stops: [
+      {offset: 0, color: colors.red},
+      {offset: 1, color: colors.base16[0x9]},
+    ],
+  }),
+} as any);
+
+export const CodeSecondaryRegionAccent = withDefaults(CodeRegionAccent, {
+  lineWidth: 8,
+  radius: 4,
+  accentRegionGrow: [20, 15],
+  stroke: new Gradient({
+    fromX: 0,
+    toX: 100,
+    angle: 45,
+    stops: [
+      {offset: 0, color: colors.blue},
+      {offset: 1, color: colors.base16[0x7]},
+    ],
+  }),
+} as any);
+
+export const WaterMark = withDefaults(Txt, {
+  text: 't.me/sysraccoon',
+  opacity: 0.05,
+  fontFamily: defaultFont,
+  fontSize: 250,
+  fontWeight: 800,
+  zIndex: Infinity,
+  fill: colors.foregroundAlt,
+  rotation: -20,
+});

@@ -1,0 +1,18 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "outDir": "../lib",
+    "inlineSourceMap": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
+    "skipLibCheck": true,
+    "strict": true,
+    "module": "esnext",
+    "target": "es2020",
+    "declaration": true,
+    "declarationMap": true,
+    "experimentalDecorators": true,
+    "composite": false
+  },
+  "include": ["."]
+}
