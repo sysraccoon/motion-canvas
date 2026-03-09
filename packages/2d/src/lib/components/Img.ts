@@ -15,7 +15,7 @@ import {computed, initial, nodeName, signal} from '../decorators';
 import {DesiredLength} from '../partials';
 import {drawImage} from '../utils';
 import {Rect, RectProps} from './Rect';
-import imageWithoutSource from './__logs__/image-without-source.md';
+// import imageWithoutSource from './__logs__/image-without-source.md';
 
 export interface ImgProps extends RectProps {
   /**
@@ -71,7 +71,7 @@ export class Img extends Rect {
 
   static {
     if (import.meta.hot) {
-      import.meta.hot.on('motion-canvas:assets', ({urls}) => {
+      import.meta.hot.on('motion-canvas:assets', ({urls}: {urls: any}) => {
         for (const url of urls) {
           if (Img.pool[url]) {
             delete Img.pool[url];
@@ -128,7 +128,7 @@ export class Img extends Rect {
     if (!('src' in props)) {
       useLogger().warn({
         message: 'No source specified for the image',
-        remarks: imageWithoutSource,
+        // remarks: imageWithoutSource,
         inspect: this.key,
       });
     }

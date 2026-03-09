@@ -20,7 +20,7 @@ import {
 } from '../curves/createCurveProfileLerp';
 import {computed, initial, nodeName, signal} from '../decorators';
 import {arc, drawLine, drawPivot, lineTo, moveTo} from '../utils';
-import lineWithoutPoints from './__logs__/line-without-points.md';
+// import lineWithoutPoints from './__logs__/line-without-points.md?raw';
 import {Curve, CurveProps} from './Curve';
 import {Layout} from './Layout';
 
@@ -294,7 +294,7 @@ export class Line extends Curve {
     if (props.children === undefined && props.points === undefined) {
       useLogger().warn({
         message: 'No points specified for the line',
-        remarks: lineWithoutPoints,
+        // remarks: lineWithoutPoints,
         inspect: this.key,
       });
     }

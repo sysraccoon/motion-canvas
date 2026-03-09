@@ -29,6 +29,8 @@
     "docs:blog": "npm run blog -w packages/docs",
     "vite-plugin:dev": "npm run dev -w packages/vite-plugin",
     "vite-plugin:build": "npm run build -w packages/vite-plugin",
+    "extra:dev": "npm run dev -w packages/extra",
+    "extra:build": "npm run build -w packages/extra",
     "e2e:test": "npm run test -w packages/e2e",
     "eslint": "eslint \"**/*.ts?(x)\"",
     "eslint:fix": "eslint --fix \"**/*.ts?(x)\"",
@@ -47,6 +49,7 @@
     "lint-staged": "^15.2.9",
     "prettier": "^3.3.3",
     "prettier-plugin-organize-imports": "^4.0.0",
+    "rollup": "^4.59.0",
     "typescript": "^5.2.2",
     "vite": "^4.5.0"
   },

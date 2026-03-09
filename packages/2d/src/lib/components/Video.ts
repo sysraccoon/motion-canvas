@@ -14,7 +14,7 @@ import {computed, initial, nodeName, signal} from '../decorators';
 import {DesiredLength} from '../partials';
 import {drawImage} from '../utils';
 import {Rect, RectProps} from './Rect';
-import reactivePlaybackRate from './__logs__/reactive-playback-rate.md';
+// import reactivePlaybackRate from './__logs__/reactive-playback-rate.md?raw';
 
 export interface VideoProps extends RectProps {
   /**
@@ -307,7 +307,7 @@ export class Video extends Rect {
       value = playbackRate();
       useLogger().warn({
         message: 'Invalid value set as the playback rate',
-        remarks: reactivePlaybackRate,
+        // remarks: reactivePlaybackRate,
         inspect: this.key,
         stack: new Error().stack,
       });

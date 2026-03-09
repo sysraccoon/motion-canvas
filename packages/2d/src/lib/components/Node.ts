@@ -64,6 +64,7 @@ export type NodeState = NodeProps & Record<string, any>;
 export interface NodeProps {
   ref?: ReferenceReceiver<any>;
   children?: SignalValue<ComponentChildren>;
+  enable?: SignalValue<boolean>;
   /**
    * @deprecated Use {@link children} instead.
    */
@@ -351,6 +352,10 @@ export class Node implements Promisable<Node> {
   @signal()
   public declare readonly cache: SimpleSignal<boolean, this>;
 
+  @initial(true)
+  @signal()
+  public declare readonly enable: SimpleSignal<boolean, this>;
+
   /**
    * Controls the padding of the cached canvas used by this node.
    *
@@ -542,6 +547,7 @@ export class Node implements Promisable<Node> {
       });
     }
     this.children(spawner ?? children);
+    rest.ref?.(this);
   }
 
   /**
@@ -1647,6 +1653,9 @@ export class Node implements Promisable<Node> {
    * @param context - The context to draw with.
    */
   public render(context: CanvasRenderingContext2D) {
+    if (!this.enable()) {
+      return;
+    }
     if (this.absoluteOpacity() <= 0) {
       return;
     }

@@ -29,7 +29,7 @@ import {
 import {Curve, CurveProps} from './Curve';
 import {Knot} from './Knot';
 import {Node} from './Node';
-import splineWithInsufficientKnots from './__logs__/spline-with-insufficient-knots.md';
+// import splineWithInsufficientKnots from './__logs__/spline-with-insufficient-knots.md';
 
 export interface SplineProps extends CurveProps {
   /**
@@ -127,7 +127,7 @@ export class Spline extends Curve {
       useLogger().warn({
         message:
           'Insufficient number of knots specified for spline. A spline needs at least two knots.',
-        remarks: splineWithInsufficientKnots,
+        // remarks: splineWithInsufficientKnots,
         inspect: this.key,
       });
     }
