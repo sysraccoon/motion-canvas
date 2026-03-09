@@ -37,18 +37,17 @@
     "vitest": "^0.34.6"
   },
   "dependencies": {
+    "@motion-canvas/2d": "^3.17.2",
+    "@motion-canvas/core": "^3.17.2",
     "@codemirror/language": "^6.10.1",
     "@lezer/common": "^1.2.1",
     "@lezer/highlight": "^1.2.0",
-    "@motion-canvas/2d": "^3.17.2",
-    "@motion-canvas/core": "^3.17.2",
+    "@lezer/javascript": "^1.4.19",
+    "@fig/lezer-bash": "^1.2.5",
     "code-fns": "^0.8.2",
     "escape-string-regexp": "^5.0.0",
     "mathjax-full": "^3.2.2",
     "parse-svg-path": "^0.1.2",
-    "@fig/lezer-bash": "^1.2.5",
-    "@hhenrichsen/canvas-commons": "^0.10.2",
-    "@lezer/javascript": "^1.4.19",
     "qrcode": "^1.5.4"
   }
 }
