@@ -1,6 +1,7 @@
 import type {
   Exporter,
   MetaField,
+  MetaOption,
   Project,
   RendererResult,
   RendererSettings,
@@ -8,6 +9,7 @@ import type {
 } from '@motion-canvas/core';
 import {
   BoolMetaField,
+  EnumMetaField,
   EventDispatcher,
   NumberMetaField,
   ObjectMetaField,
@@ -35,6 +37,12 @@ type InvokeStrategy = 'ws' | 'octet-stream';
 const EXPORT_FRAME_LIMIT = 256;
 const EXPORT_RETRY_DELAY = 1000;
 
+export type FFmpegPreset = 'mp4-libx264-yuv420p' | 'mov-yuva444p10le';
+export const FFmpegPresetOption: MetaOption<FFmpegPreset>[] = [
+  {value: 'mp4-libx264-yuv420p', text: 'general (mp4)'},
+  {value: 'mov-yuva444p10le', text: 'transparent (mov)'},
+];
+
 /**
  * FFmpeg video exporter.
  *
@@ -59,6 +67,7 @@ export class FFmpegExporterClient implements Exporter {
 
   public static meta(project: Project): MetaField<any> {
     return new ObjectMetaField(this.displayName, {
+      preset: new EnumMetaField('preset', FFmpegPresetOption),
       fastStart: new BoolMetaField('fast start', true),
       includeAudio: new BoolMetaField('include audio', true).disable(
         !project.audio,

@@ -15,12 +15,16 @@ import {ImageStream} from './ImageStream';
 ffmpeg.setFfmpegPath(ffmpegPath!);
 ffmpeg.setFfprobePath(ffprobePath!);
 
+export type FFmpegPreset = 'mp4-libx264-yuv420p' | 'mov-yuva444p10le';
+
 export interface FFmpegExporterSettings extends RendererSettings {
   audio?: string;
   audioOffset?: number;
 
   sounds: Sound[];
   duration: number;
+
+  preset: FFmpegPreset;
 
   fastStart: boolean;
   includeAudio: boolean;
@@ -166,14 +170,32 @@ export class FFmpegExporterServer {
     }
 
     // Output settings
-    this.command
-      .output(path.join(this.config.output, `${settings.name}.mp4`))
-      .outputOptions([
-        '-pix_fmt yuv420p',
-        `-t ${settings.duration / settings.fps}`,
-      ])
-      .outputFps(settings.fps)
-      .size(`${size.x}x${size.y}`);
+    switch (settings.preset) {
+      case 'mp4-libx264-yuv420p':
+        this.command
+          .output(path.join(this.config.output, `${settings.name}.mp4`))
+          .outputOptions([
+            '-c:v libx264',
+            '-pix_fmt yuv420p',
+            `-t ${settings.duration / settings.fps}`,
+          ]);
+        break;
+      case 'mov-yuva444p10le':
+        this.command
+          .output(path.join(this.config.output, `${settings.name}.mov`))
+          .outputOptions([
+            '-c:v prores_ks',
+            '-profile:v 4',
+            '-vendor apl0',
+            '-bits_per_mb 8000',
+            '-pix_fmt yuva444p10le',
+            `-t ${settings.duration / settings.fps}`,
+          ]);
+        break;
+    }
+
+    this.command.outputFps(settings.fps).size(`${size.x}x${size.y}`);
+
     if (settings.fastStart) {
       this.command.outputOptions(['-movflags +faststart']);
     }
