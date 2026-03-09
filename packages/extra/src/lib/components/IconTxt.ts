@@ -9,7 +9,7 @@ import {
   signal,
 } from '@motion-canvas/2d';
 import {DEFAULT, SignalValue, SimpleSignal} from '@motion-canvas/core';
-import {rotateSpawn} from '../animations';
+import {rotateIn} from '../animations';
 import {colors} from '../colorscheme';
 import {defaultFont} from '../consts';
 
@@ -69,7 +69,7 @@ export class IconTxt extends Rect {
 
   public *inTransition(duration: number = 0.5) {
     this.txtClip().width(0);
-    yield* rotateSpawn(this);
+    yield* rotateIn(this);
     yield* this.txtClip().width(DEFAULT, duration);
   }
 }

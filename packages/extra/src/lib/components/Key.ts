@@ -21,7 +21,7 @@ import {
   createRef,
   waitFor,
 } from '@motion-canvas/core';
-import {fadeInTransition, fadeOutTransition} from '../animations';
+import {fadeIn, fadeOut} from '../animations';
 import {colors} from '../colorscheme';
 import {defaultFont} from '../consts';
 
@@ -124,7 +124,7 @@ export class Key extends Rect {
   public *changeLabels(labels: KeyLabels, duration: number = 0.8) {
     const fadeOutTasks = [];
     for (const txtLabel of this.txtLabels) {
-      fadeOutTasks.push(fadeOutTransition(txtLabel, duration * 0.5));
+      fadeOutTasks.push(fadeOut(txtLabel, duration * 0.5));
     }
 
     // preserve overall duration if txtLabels is empty
@@ -140,7 +140,7 @@ export class Key extends Rect {
     const fadeInTasks = [];
     for (const txtLabel of this.txtLabels) {
       this.labelHolder().add(txtLabel);
-      fadeInTasks.push(fadeInTransition(txtLabel, duration * 0.5));
+      fadeInTasks.push(fadeIn(txtLabel, duration * 0.5));
     }
     yield* all(...fadeInTasks);
   }

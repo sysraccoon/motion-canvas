@@ -12,17 +12,14 @@ import {applyState, deepSaveState} from './node-utils';
 
 const DEFAULT_DURATION = 0.4;
 
-export function* spawnTrimPath(
-  curve: Curve,
-  duration: number = DEFAULT_DURATION,
-) {
+export function* trimPathIn(curve: Curve, duration: number = DEFAULT_DURATION) {
   curve.opacity(1);
   curve.start(0);
   curve.end(0);
   yield* curve.end(1, duration);
 }
 
-export function* hideTrimPath(
+export function* trimPathOut(
   curve: Curve,
   duration: number = DEFAULT_DURATION,
 ) {
@@ -32,45 +29,30 @@ export function* hideTrimPath(
   curve.opacity(0);
 }
 
-export function* fadeInTransition(
-  layout: Layout,
-  duration: number = DEFAULT_DURATION,
-) {
+export function* fadeIn(layout: Layout, duration: number = DEFAULT_DURATION) {
   const opacity = layout.opacity.context.raw();
   layout.opacity(0);
   yield* layout.opacity(opacity ?? DEFAULT, duration);
 }
 
-export function* fadeOutTransition(
-  layout: Layout,
-  duration: number = DEFAULT_DURATION,
-) {
+export function* fadeOut(layout: Layout, duration: number = DEFAULT_DURATION) {
   const opacity = layout.opacity.context.raw();
   yield* layout.opacity(0, duration);
   layout.opacity(opacity ?? DEFAULT);
 }
 
-export function* popupSpawn(
-  layout: Layout,
-  duration: number = DEFAULT_DURATION,
-) {
+export function* popupIn(layout: Layout, duration: number = DEFAULT_DURATION) {
   const scale = layout.scale.context.raw();
   layout.scale(0);
   yield* all(layout.scale(scale, duration, easeOutBack));
 }
 
-export function* popupHide(
-  layout: Layout,
-  duration: number = DEFAULT_DURATION,
-) {
+export function* popupOut(layout: Layout, duration: number = DEFAULT_DURATION) {
   layout.scale(1);
   yield* layout.scale(0, duration, easeInBack);
 }
 
-export function* rotateSpawn(
-  layout: Layout,
-  duration: number = DEFAULT_DURATION,
-) {
+export function* rotateIn(layout: Layout, duration: number = DEFAULT_DURATION) {
   const state = deepSaveState(layout);
 
   const scale = layout.scale();
@@ -113,10 +95,7 @@ export function* smoothAdd(
     layout.size(currentSize);
   }
 
-  yield* all(
-    layout.size(targetSize, duration),
-    fadeInTransition(node, duration),
-  );
+  yield* all(layout.size(targetSize, duration), fadeIn(node, duration));
 
   layout.size.reset();
 }
@@ -251,7 +230,7 @@ export function* smoothAddWithAutoscroll(
   yield* all(
     layout.size(targetSize, duration),
     layout.position(layout.position().add(autoScroll), duration),
-    popupSpawn(node),
+    popupIn(node),
   );
   layout.size.reset();
 }
