@@ -3,6 +3,7 @@ export * from './Browser';
 export * from './CodeRegionAccent';
 export * from './Directory';
 export * from './DotGrid';
+export * from './DotSphere';
 export * from './Editor';
 export * from './File';
 export * from './IconTxt';
