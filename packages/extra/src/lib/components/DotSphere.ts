@@ -18,7 +18,7 @@ export class DotSphere extends Shape {
   @vector2Signal('spacing')
   public declare readonly spacing: Vector2Signal<this>;
 
-  @initial(80)
+  @initial(0)
   @vector2Signal('dotOffset')
   public declare readonly dotOffset: Vector2Signal<this>;
 
@@ -37,18 +37,35 @@ export class DotSphere extends Shape {
 
     const radius = Math.max(size.x, size.y);
 
-    const offsetX = Math.max(0, Math.min(1, this.dotOffset().x));
-    const offsetY = Math.max(0, Math.min(1, this.dotOffset().y));
+    const rawOffsetX = this.dotOffset().x || 0;
+    const rawOffsetY = this.dotOffset().y || 0;
 
-    const cycleX = offsetX;
-    const cycleY = offsetY;
+    const getCyclicFraction = (value: number): number => {
+      const absValue = Math.abs(value);
+      const fraction = absValue - Math.floor(absValue);
+
+      return value >= 0 ? fraction : 1 - fraction;
+    };
+
+    const cycleX = getCyclicFraction(rawOffsetX);
+    const cycleY = getCyclicFraction(rawOffsetY);
 
     const extraSteps = 1;
 
     for (let x = -steps.x - extraSteps; x <= steps.x + extraSteps; x++) {
       for (let y = -steps.y - extraSteps; y <= steps.y + extraSteps; y++) {
-        const shiftedX = x + cycleX;
-        const shiftedY = y + cycleY;
+        const integerPartX =
+          Math.floor(Math.abs(rawOffsetX)) * (rawOffsetX >= 0 ? 1 : -1);
+        const integerPartY =
+          Math.floor(Math.abs(rawOffsetY)) * (rawOffsetY >= 0 ? 1 : -1);
+
+        const adjustedIntegerX =
+          rawOffsetX >= 0 ? integerPartX : -integerPartX - 1;
+        const adjustedIntegerY =
+          rawOffsetY >= 0 ? integerPartY : -integerPartY - 1;
+
+        const shiftedX = x + cycleX + adjustedIntegerX;
+        const shiftedY = y + cycleY + adjustedIntegerY;
 
         const gridWidth = steps.x * 2 + 1;
         const gridHeight = steps.y * 2 + 1;
