@@ -32,7 +32,7 @@ export class Window extends Rect {
   public constructor(props: WindowProps) {
     super({
       fill: colors.backgroundAlt,
-      padding: 48,
+      padding: 40,
       radius: 20,
       ...props,
       layout: true,
@@ -48,28 +48,28 @@ export class Window extends Rect {
         children: [
           new Icon({
             icon: this.icon,
-            size: 42,
+            size: 34,
             color: colors.foreground,
           }),
           new Txt({
             text: this.title,
             fill: colors.foreground,
-            fontSize: 48,
+            fontSize: 36,
             fontFamily: defaultFont,
           }),
           new Layout({
             grow: 1,
           }),
           new Circle({
-            size: 42,
+            size: 34,
             fill: colors.green,
           }),
           new Circle({
-            size: 42,
+            size: 34,
             fill: colors.yellow,
           }),
           new Circle({
-            size: 42,
+            size: 34,
             fill: colors.red,
           }),
         ],
