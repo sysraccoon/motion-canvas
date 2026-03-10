@@ -1481,7 +1481,7 @@ export class Node implements Promisable<Node> {
       this.view().cachePadding(),
     );
     const canvasBBox = BBox.fromPoints(
-      ...viewBBox.transformCorners(this.view().localToWorld()),
+      ...viewBBox.transformCorners(this.localToWorld()),
     );
     const cacheBBox = BBox.fromPoints(
       ...this.cacheBBox().transformCorners(this.localToWorld()),
