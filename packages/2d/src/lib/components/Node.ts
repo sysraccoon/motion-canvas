@@ -1477,17 +1477,11 @@ export class Node implements Promisable<Node> {
    */
   @computed()
   protected worldSpaceCacheBBox(): BBox {
-    const viewBBox = BBox.fromSizeCentered(this.view().size()).expand(
-      this.view().cachePadding(),
-    );
-    const canvasBBox = BBox.fromPoints(
-      ...viewBBox.transformCorners(this.localToWorld()),
-    );
     const cacheBBox = BBox.fromPoints(
       ...this.cacheBBox().transformCorners(this.localToWorld()),
     );
 
-    return canvasBBox.intersection(cacheBBox).pixelPerfect.expand(2);
+    return cacheBBox.pixelPerfect.expand(2);
   }
 
   @computed()
