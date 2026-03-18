@@ -194,6 +194,32 @@ export class Camera extends Node {
     yield* this.position(position, duration, timing, interpolationFunction);
   }
 
+  @threadable()
+  public *rotateAround(
+    positionOrNode: Node | PossibleVector2,
+    degree: number,
+    duration: number,
+    timingFunction?: TimingFunction,
+  ): ThreadGenerator {
+    const position: Vector2 = new Vector2(
+      positionOrNode instanceof Node
+        ? positionOrNode
+            .absolutePosition()
+            .transformAsPoint(this.scene().worldToLocal())
+        : positionOrNode,
+    );
+    const targetPosition = this.position().rotate(degree, position);
+    yield* all(
+      this.position(
+        targetPosition,
+        duration,
+        timingFunction,
+        Vector2.createPolarLerp(false, position),
+      ),
+      this.rotation(this.rotation() + degree, duration, timingFunction),
+    );
+  }
+
   /**
    * Makes the camera follow a path specified by the provided curve.
    *
