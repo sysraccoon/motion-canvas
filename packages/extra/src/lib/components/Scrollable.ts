@@ -1,4 +1,4 @@
-import {Node, Rect, RectProps, signal} from '@motion-canvas/2d';
+import {Node, Rect, RectProps, computed, signal} from '@motion-canvas/2d';
 import {
   DEFAULT,
   PossibleVector2,
@@ -29,6 +29,11 @@ export class Scrollable extends Rect {
         children: props.children,
       }),
     );
+  }
+
+  @computed()
+  public getScroll(): Vector2 {
+    return this.viewport().position();
   }
 
   public *resetScroll() {
